@@ -9,11 +9,16 @@ Reproduces the core Builder.io integration (content fetching, preview mode, comp
 ## Setup
 
 ```bash
-cp .env.local.example .env.local
-# edit .env.local and set NEXT_PUBLIC_BUILDERIO to your Builder space API key
+cp .env.example .env.local
+# open .env.local and replace the value of NEXT_PUBLIC_BUILDERIO with the Builder.io space API key
 yarn
 yarn dev
 ```
+
+1. Copy the env file: `cp .env.example .env.local`
+2. In `.env.local`, set `NEXT_PUBLIC_BUILDERIO` to the Builder.io space API key 
+3. Run `yarn && yarn dev` — the app will be available at `http://localhost:3000`
+4. Set the preview URL in Builder to `http://localhost:3000` to test draft changes live
 
 ## Integration layers
 
