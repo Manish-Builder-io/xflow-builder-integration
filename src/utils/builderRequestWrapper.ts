@@ -18,7 +18,7 @@ export const builderFetch = async (
 ) => {
   const { fetchAsList, ...restOptions } = options;
   const finalOptions = {
-    cachebust: isPreviewEnabled || isDevelopment,
+    cachebust: (isPreviewEnabled || isDevelopment) ? Date.now() : undefined,
     includeUnpublished: isPreviewEnabled || isDevelopment,
     preview: isPreviewEnabled,
     cacheSeconds: 0,
@@ -33,7 +33,11 @@ export const builderFetch = async (
       const value = obj[key];
       const fullKey = constructedKey ? `${constructedKey}.${key}` : key;
 
-      if (typeof value === 'object' && value !== null) {
+      if (value === undefined || value === null || value === false) {
+        return queryString;
+      }
+
+      if (typeof value === 'object') {
         return queryString + buildQuery(value, fullKey);
       }
 
